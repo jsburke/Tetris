@@ -224,6 +224,8 @@ int main(int argc, char* argv[])
 	}
 
 	close();
+	free(falling);
+	free(next);
 	return 0;
 }
 
