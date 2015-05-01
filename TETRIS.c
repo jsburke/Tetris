@@ -13,6 +13,7 @@ const int SCREEN_HEIGHT = 480;
 #define SCORE_Y			250
 #define NUM_WIDTH		15
 #define DROP_RATE		600
+#define DROP_SCALER             15
 #define LOCK_RATE		200
 #define KEY_RATE        50
 
@@ -496,5 +497,5 @@ int auto_drop(tetromino * falling, int* game_grid, int drop_count, int score)
 	if(drop_count == 0)
 		tetromino_drop(falling, game_grid);
 
-	drop_count = (drop_count + score / 10 >= DROP_RATE)? 0:drop_count + 1;
+	drop_count = (drop_count + score / DROP_SCALER >= DROP_RATE)? 0:drop_count + 1;
 }
