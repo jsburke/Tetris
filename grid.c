@@ -25,9 +25,9 @@ void init_grid(int* game_grid)
 	}
 }*/
 
-int  grid_get(int* game_grid, int x, int y)
+int  grid_get(int* game_grid, int row, int col) // input as y val then x val
 {
-	int offset = grid_coords_2_offset(x, y);
+	int offset = grid_coords_2_offset(row, col);
 	return game_grid[offset];
 }
 
