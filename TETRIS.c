@@ -223,7 +223,6 @@ int main(int argc, char* argv[])
 		SDL_UpdateWindowSurface(MainWin);
 	}
 
-	//free tetrominos!!!!!!!!
 	close();
 	return 0;
 }
