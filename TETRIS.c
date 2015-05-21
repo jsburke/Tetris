@@ -23,7 +23,8 @@ enum keypress_type{
 	DOWN,
 	LEFT,
 	RIGHT,
-	ESC
+	ESC,
+	SPACE
 };
 
 
@@ -74,9 +75,11 @@ int main(int argc, char* argv[])
 	int game_over, score;
 	int game_grid[CELLS] = {0};
 	int row_test, last_row, drop_count, lock_in, key_count;
+	int first_hold = 1;
 
 	tetromino * falling;
 	tetromino * next;
+	tetromino * hold;
 	tetromino * temp;
 
 	set_rand();
@@ -88,6 +91,7 @@ int main(int argc, char* argv[])
 
 	falling = tetromino_new(ACTIVE);
 	next    = tetromino_new(INACTIVE);
+	hold    = tetromino_new(INACTIVE);
 	temp    = NULL;
 	
 	//log = fopen("Log.txt","w");
@@ -162,6 +166,10 @@ int main(int argc, char* argv[])
 						case SDLK_ESCAPE:
 							key_press = ESC;
 						break;
+						
+						case SDLK_SPACE:
+							key_press = SPACE;
+						break;
 					}
 				break;
 			}
@@ -187,9 +195,31 @@ int main(int argc, char* argv[])
 						tetromino_shift_left(falling, game_grid);
 					break;
 	
-				case ESC:
-				game_over = 1;
-				break;
+					case ESC:
+					game_over = 1;
+					break;
+					
+					case SPACE: // this still would be nice with visuals...
+						if(first_hold == 1)
+						{
+							temp = hold;
+							tetromino_mod(temp);
+							hold = falling;
+							falling = next;
+							tetromino_activate(falling);
+							next = temp;
+							temp = NULL;
+							first_hold = 0;
+						}
+						else
+						{
+							temp = falling;
+							falling = hold;
+							tetromino_activate(falling);
+							hold = temp;
+							temp = NULL;
+						}
+					break;
 			}
 		//}
 
@@ -227,6 +257,7 @@ int main(int argc, char* argv[])
 	close();
 	free(falling);
 	free(next);
+	free(hold);
 	return 0;
 }
 
