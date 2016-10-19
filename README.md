@@ -1,5 +1,7 @@
 This is an implementation of Tetris in C using SDL2.
 
+N.B.:  I'm not likely to update this much more -- 10-19-2016
+
 In order for this to compile, you must have the proper packages installed for SDL.  Probably the easiest guide to follow for this can be found here:
 http://lazyfoo.net/tutorials/SDL/01_hello_SDL/
 
