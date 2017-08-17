@@ -1,4 +1,9 @@
-#include <SDL.h>
+#ifdef ENV_WINDOWS
+	#include <SDL.h>
+#elif ENV_LINUX
+	#include <SDL2/SDL.h>
+#endif
+
 #include <stdio.h>
 
 #include "tetromino.h"
@@ -35,7 +40,7 @@ enum keypress_type{
 
 int init();
 int load_media();
-void close();
+void game_close();
 
 // blit functions
 
@@ -254,7 +259,7 @@ int main(int argc, char* argv[])
 		SDL_UpdateWindowSurface(MainWin);
 	}
 
-	close();
+	game_close();
 	free(falling);
 	free(next);
 	free(hold);
@@ -413,7 +418,7 @@ int load_media()
 	return 1;
 }
 
-void close()
+void game_close()
 {
 	int i;
 	for(i = 0; i < BLOCK_TYPE_TOTAL; i++)
